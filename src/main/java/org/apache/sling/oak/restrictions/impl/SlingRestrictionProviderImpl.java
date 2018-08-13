@@ -21,9 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.jackrabbit.oak.api.PropertyState;
@@ -35,6 +32,8 @@ import org.apache.jackrabbit.oak.spi.security.authorization.restriction.Restrict
 import org.apache.jackrabbit.oak.spi.security.authorization.restriction.RestrictionDefinitionImpl;
 import org.apache.jackrabbit.oak.spi.security.authorization.restriction.RestrictionPattern;
 import org.apache.jackrabbit.oak.spi.security.authorization.restriction.RestrictionProvider;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -71,9 +70,9 @@ public class SlingRestrictionProviderImpl extends AbstractRestrictionProvider {
 
     // ------------------------------------------------< RestrictionProvider >---
 
-    @Nonnull
+    @NotNull
     @Override
-    public RestrictionPattern getPattern(String oakPath, @Nonnull Tree tree) {
+    public RestrictionPattern getPattern(String oakPath, @NotNull Tree tree) {
         if (oakPath != null) {
             PropertyState resourceTypes = tree.getProperty(SLING_RESOURCE_TYPES);
             if (resourceTypes != null) {
@@ -91,9 +90,9 @@ public class SlingRestrictionProviderImpl extends AbstractRestrictionProvider {
         return RestrictionPattern.EMPTY;
     }
 
-    @Nonnull
+    @NotNull
     @Override
-    public RestrictionPattern getPattern(@Nullable String oakPath, @Nonnull Set<Restriction> restrictions) {
+    public RestrictionPattern getPattern(@Nullable String oakPath, @NotNull Set<Restriction> restrictions) {
 
         if (oakPath != null && !restrictions.isEmpty()) {
             for (Restriction r : restrictions) {

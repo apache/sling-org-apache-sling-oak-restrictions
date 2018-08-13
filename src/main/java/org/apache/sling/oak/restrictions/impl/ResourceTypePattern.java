@@ -22,14 +22,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import org.apache.jackrabbit.oak.api.PropertyState;
 import org.apache.jackrabbit.oak.api.Tree;
 import org.apache.jackrabbit.oak.spi.security.authorization.restriction.RestrictionPattern;
 import org.apache.jackrabbit.oak.util.TreeUtil;
 import org.apache.sling.api.SlingConstants;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,7 +49,7 @@ public class ResourceTypePattern implements RestrictionPattern {
     private final Map<String,Set<String>> resourceTypesByPath;
     
   
-    ResourceTypePattern(@Nonnull Iterable<String> resourceTypesRaw, String limitedToPath, boolean matchChildren) {
+    ResourceTypePattern(@NotNull Iterable<String> resourceTypesRaw, String limitedToPath, boolean matchChildren) {
         
         this.limitedToPath = limitedToPath;
         this.matchChildren = matchChildren;
@@ -89,7 +88,7 @@ public class ResourceTypePattern implements RestrictionPattern {
     }
 
     @Override
-    public boolean matches(@Nonnull Tree tree, @Nullable PropertyState property) {
+    public boolean matches(@NotNull Tree tree, @Nullable PropertyState property) {
         boolean isMatch = matchesAtTree(tree);
         if(!isMatch && matchChildren) { // try parent hierarchy
             Tree treeCursor = tree;
@@ -143,7 +142,7 @@ public class ResourceTypePattern implements RestrictionPattern {
 
 
     @Override
-    public boolean matches(@Nonnull String path) {
+    public boolean matches(@NotNull String path) {
         return false;
     }
 
