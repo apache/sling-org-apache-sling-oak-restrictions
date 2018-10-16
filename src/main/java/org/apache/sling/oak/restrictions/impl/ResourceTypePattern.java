@@ -24,8 +24,8 @@ import java.util.Set;
 
 import org.apache.jackrabbit.oak.api.PropertyState;
 import org.apache.jackrabbit.oak.api.Tree;
+import org.apache.jackrabbit.oak.api.Type;
 import org.apache.jackrabbit.oak.spi.security.authorization.restriction.RestrictionPattern;
-import org.apache.jackrabbit.oak.util.TreeUtil;
 import org.apache.sling.api.SlingConstants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -126,7 +126,7 @@ public class ResourceTypePattern implements RestrictionPattern {
                 }
                 
                 Set<String> resourceTypesForPath = resourceTypesByPath.get(path);
-                String actualResourceType = TreeUtil.getString(treeToCheck, SLING_RESOURCE_TYPE);
+                String actualResourceType = getResourceTypeFromTree(treeToCheck);
                 isResourceTypeMatch = resourceTypesForPath.contains(actualResourceType);
                 
                 if(LOG.isTraceEnabled()) {
@@ -140,6 +140,10 @@ public class ResourceTypePattern implements RestrictionPattern {
         return isResourceTypeMatch;
     }
 
+    public String getResourceTypeFromTree(Tree treeToCheck) {
+        PropertyState property = treeToCheck.getProperty(SLING_RESOURCE_TYPE);
+        return property != null && !property.isArray() ? property.getValue(Type.STRING) : null;
+    }
 
     @Override
     public boolean matches(@NotNull String path) {
