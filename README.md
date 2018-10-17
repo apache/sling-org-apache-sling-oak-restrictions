@@ -6,4 +6,4 @@
 
 This module is part of the [Apache Sling](https://sling.apache.org) project.
 
-Supports additional restrictions for OAK (e.g. for resource type).
+Supports additional restrictions for OAK (e.g. for resource type). See [Sling documentation](https://sling.apache.org/documentation/bundles/sling-oak-restrictions.html) for details.
