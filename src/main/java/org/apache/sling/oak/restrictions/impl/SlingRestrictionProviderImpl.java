@@ -21,8 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.felix.scr.annotations.Component;
-import org.apache.felix.scr.annotations.Service;
 import org.apache.jackrabbit.oak.api.PropertyState;
 import org.apache.jackrabbit.oak.api.Tree;
 import org.apache.jackrabbit.oak.api.Type;
@@ -37,6 +35,8 @@ import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.osgi.service.component.annotations.Component;
+
 /** Sling restriction provider implementation that supports the following restrictions:
  *
  * <ul>
@@ -46,8 +46,7 @@ import org.slf4j.LoggerFactory;
  * 
  * Further sling restriction can be added here in future.
 */
-@Component
-@Service(RestrictionProvider.class)
+@Component(service = {RestrictionProvider.class})
 public class SlingRestrictionProviderImpl extends AbstractRestrictionProvider {
 
     private static final Logger LOG = LoggerFactory.getLogger(SlingRestrictionProviderImpl.class);

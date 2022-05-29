@@ -1,0 +1,1 @@
+Import-Package: org.apache.jackrabbit.oak.api;version="[1.0,4)", *
